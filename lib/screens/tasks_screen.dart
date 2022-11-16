@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/widgets/tasks_list.dart';
+import 'package:todolist/screens/add_task_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/models/task_data.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -11,7 +14,12 @@ class TasksScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => const AddTaskScreen(),
+          );
+        },
       ),
       body: SafeArea(
         child: Column(
@@ -22,8 +30,8 @@ class TasksScreen extends StatelessWidget {
                   top: 60, left: 30, right: 30, bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 30,
                     child: Icon(
@@ -32,11 +40,11 @@ class TasksScreen extends StatelessWidget {
                       color: Colors.lightBlueAccent,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Todoey',
+                  const Text(
+                    'Todo-List',
                     style: TextStyle(
                       fontSize: 50,
                       color: Colors.white,
@@ -44,8 +52,8 @@ class TasksScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '12 Tasks',
-                    style: TextStyle(
+                    '${Provider.of<TaskData>(context).taskCount} Tasks',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                     ),
